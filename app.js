@@ -4,15 +4,29 @@ let squares = document.querySelectorAll('.square');
 let pickedColor = pickColor();
 let colorDisplay = document.querySelector('#colorDisplay');
 let messageDisplay = document.querySelector('#message');
+let resetButton = document.querySelector('#reset');
 let header = document.querySelector('h1');
 
-
 colorDisplay.textContent = pickedColor;
+
+resetButton.addEventListener('click', function () {
+  // Generate all new colors
+  colors = generateRandomColors(6);
+  // Pick a new random color from array
+  pickedColor = pickColor();
+  // change color display to match picked color
+  colorDisplay.textContent = pickedColor;
+  // change colors of squares
+  for (let index = 0; index < squares.length; index++) {
+    squares[index].style.backgroundColor = colors[index];
+  }
+  resetButton.textContent = 'New colors!';
+  header.style.background = '#232323';
+});
 
 for (let index = 0; index < squares.length; index++) {
   // Add initial colors to quares
   squares[index].style.backgroundColor = colors[index];
-
   // Add Event listeners to squares
   squares[index].addEventListener('click', function () {
     // Grab color of picked square
@@ -20,7 +34,8 @@ for (let index = 0; index < squares.length; index++) {
 
     // compare color to pickedColor
     if (clickedColor === pickedColor) {
-      messageDisplay.textContent = 'You got it Right!';
+      messageDisplay.textContent = 'You Win!';
+      resetButton.textContent = 'Play Again?'
       changeColors(clickedColor);
       header.style.backgroundColor = clickedColor;
     } else {
