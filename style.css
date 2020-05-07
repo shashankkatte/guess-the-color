@@ -13,6 +13,9 @@ h1 {
   float: left;
   margin: 1.6%;
 }
+.selected {
+    background: blue;
+}
 
 #container {
   margin: 0 auto;
